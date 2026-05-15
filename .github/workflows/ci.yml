@@ -10,17 +10,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      -uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      -name: install tools
-      run:|
-      sudo apt install hyperfine valgrind -y
+      - name: install tools
+        run: |
+          sudo apt install hyperfine valgrind -y
 
-      -name: Build
-      run: gcc -g -O2 program src/main.c
+      - name: Build
+        run: gcc -g -O2 program src/main.c
 
-      -name: ishowspeed
-      run: hyperfine --warmup 3 './program'
+      - name: ishowspeed
+        run: hyperfine --warmup 3 './program'
 
-      -name: iseememleak?
-      run: valgrind --leak-check=full --error-exitcode=1 ./program
+      - name: iseememleak?
+        run: valgrind --leak-check=full --error-exitcode=1 ./program
